@@ -15,14 +15,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Flashcard> _flashcards = [
-    Flashcard(question: "1", answer: "1"),
-    Flashcard(question: "2", answer: "2"),
-    Flashcard(question: "3", answer: "3"),
-    Flashcard(question: "4", answer: "4"),
-    Flashcard(question: "5", answer: "5"),
-  ];
-
   int _currIndex = 0;
 
   @override
@@ -38,8 +30,10 @@ class _MyAppState extends State<MyApp> {
               width: 250,
               height: 250,
               child: FlipCard(
-                  front: FlashcardView(text: _flashcards[_currIndex].question),
-                  back: FlashcardView(text: _flashcards[_currIndex].answer)),
+                  front: FlashcardView(
+                      text: flashcard()._flashcards[_currIndex].question),
+                  back: FlashcardView(
+                      text: flashcard()._flashcards[_currIndex].answer)),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -64,14 +58,17 @@ class _MyAppState extends State<MyApp> {
 
   void nextCard() {
     setState(() {
-      _currIndex = (_currIndex + 1 < _flashcards.length) ? _currIndex + 1 : 0;
+      _currIndex = (_currIndex + 1 < flashcard()._flashcards.length)
+          ? _currIndex + 1
+          : 0;
     });
   }
 
   void previousCard() {
     setState(() {
-      _currIndex =
-          (_currIndex - 1 >= 0) ? _currIndex - 1 : _flashcards.length - 1;
+      _currIndex = (_currIndex - 1 >= 0)
+          ? _currIndex - 1
+          : flashcard()._flashcards.length - 1;
     });
   }
 }
